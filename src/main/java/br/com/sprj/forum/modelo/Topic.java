@@ -13,10 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Topic {
 
     @Id
@@ -37,11 +41,5 @@ public class Topic {
 
     @OneToMany(mappedBy = "topic")
     private List<Answer> answers = new ArrayList<>();
-
-    public Topic(String title, String message, Course course) {
-	this.title = title;
-	this.message = message;
-	this.course = course;
-    }
 
 }
