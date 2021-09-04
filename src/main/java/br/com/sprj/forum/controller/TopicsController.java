@@ -8,12 +8,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.sprj.forum.controller.dto.TopicDetailDto;
 import br.com.sprj.forum.controller.dto.TopicDto;
 import br.com.sprj.forum.controller.form.TopicForm;
 import br.com.sprj.forum.modelo.Topic;
@@ -47,6 +49,12 @@ public class TopicsController {
 	topicRepository.save(topic);
 	URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topic.getId()).toUri();
 	return ResponseEntity.created(uri).body(new TopicDto(topic));
+    }
+
+    @GetMapping("/{id}")
+    public TopicDetailDto detail(@PathVariable("id") Long id) {
+	Topic topic = topicRepository.getById(id);
+	return new TopicDetailDto(topic);
     }
 
 }

@@ -17,6 +17,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String message;
 
     @ManyToOne
@@ -26,6 +27,7 @@ public class Answer {
 
     @ManyToOne
     private User author;
+    
     private Boolean solution = false;
 
 }
